@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a,p,h1,h2,h3,h4,h5,h6,span,.menu.menu-horizontal{
+    color: #570df8;
+}
+main{
+	min-height: 70vh;
+    background-color: whitesmoke;
+}
+.react-datepicker-wrapper {
+    text-align: center;
+    font-size: 24px;
+}
+.react-datepicker__input-container {
+    border: 1px solid #570df8;
+    padding: 5px;
+}
+@media(min-width: 768px){
+    .menu.menu-horizontal {
+        font-weight: 500;
+    }
+	.left-siebar::after {
+        position: absolute;
+        content: "";
+        border-right: 2px solid #570df8;
+        height: 60vh;
+        top: 18vh;
+        left: 26vw;
+    }
+}
