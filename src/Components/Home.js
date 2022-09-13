@@ -1,6 +1,6 @@
 import React from 'react';
-import AddTodo from './AddTodo/AddTodo';
-import AllTodo from './AllTodo/AllTodo';
+import AddTask from './AddTask/AddTask';
+import AllTask from './AllTask/AllTask';
 
 const Home = () => {
 	
@@ -13,7 +13,7 @@ const Home = () => {
 						<h2 className='uppercase pb-2 text-center lg:text-left'>ADD YOUR TASK</h2>
 					</div>
 					<div>
-						<AddTodo></AddTodo>
+						<AddTask></AddTask>
 					</div>
 				</div>
 
@@ -23,7 +23,7 @@ const Home = () => {
 					</div>
 
 					<ul className='grid grid-cols-1 md:grid-cols-2 gap-1'>
-						<AllTodo></AllTodo>
+						<AllTask></AllTask>
 						{/* {
 							todos.map((item, index)=>{
 								<AllTodo

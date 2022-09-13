@@ -1,9 +1,9 @@
 import React, {useContext, useState } from 'react';
-import { todoContext } from '../../App';
+import { taskContext } from '../../App';
 
-const AddTodo = () => {
+const AddTask = () => {
 	const [todoItem, setTodoItem] = useState('');
-	const {setIsLoad} = useContext(todoContext);
+	const {setIsLoad} = useContext(taskContext);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -28,4 +28,4 @@ const AddTodo = () => {
 	);
 };
 
-export default AddTodo;
+export default AddTask;

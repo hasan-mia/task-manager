@@ -3,21 +3,21 @@ import { todoContext } from '../../App';
 
 const UpdateTodo = ({updateId, setUpdateId}) => {
 	const [todoItem, setTodoItem] = useState('');
-	const {todos, setTodos, setIsLoad} = useContext(todoContext);
+	const {tasks, setTasks, isLoad, setIsLoad} = useContext(todoContext);
 
 	// // Get Specific Item With ID
-	const todoElement = todos.find(item => item._id === updateId);
-	const {todo, _id} = todoElement;
+	const taskElement = tasks.find(task => task._id === updateId);
+	const {todo, _id} = taskElement;
 
 	const handleUpdate = (e) => {
 		e.preventDefault();
-		const todo = todoItem;
+		const task = todoItem;
 
 		const url = `https://todotask-management.herokuapp.com/todo/${_id}`;
 		fetch(url, {
 			method: 'PATCH',
 			headers: {'Content-type': 'application/json; charset=UTF-8'},
-			body: JSON.stringify({todo}),
+			body: JSON.stringify({task}),
 		})
 		.then((response) => response.json())
 		.then(data => {console.log(data);setIsLoad(true);setTodoItem('')});
