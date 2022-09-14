@@ -21,12 +21,12 @@ main{
     .menu.menu-horizontal {
         font-weight: 500;
     }
-	.left-siebar::after {
+	/* .left-siebar::after {
         position: absolute;
         content: "";
         border-right: 2px solid #570df8;
         height: 60vh;
         top: 18vh;
         left: 26vw;
-    }
+    } */
 }

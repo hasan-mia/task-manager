@@ -1,30 +1,123 @@
 import React, {useContext, useState } from 'react';
 import { taskContext } from '../../App';
+import FormData from 'form-data';
+import axios from 'axios'
 
 const AddTask = () => {
-	const [todoItem, setTodoItem] = useState('');
-	const {setIsLoad} = useContext(taskContext);
+	// user data from contex api
+	const {users} = useContext(taskContext);
+	// token handler
+	const token = {
+		headers: { "Content-Type": "multipart/form-data" },
+		'AuthToken': 'UrM4YHgb1FcqEf1tuKwmAMMX5MxFZ12a'
+	  }
+	// set state variable to handle submit data
+	const [taskMessege, setTaskMessage] = useState('');
+	const [assignName, setAssignName] = useState('');
+	const [assignTo, setAssignTo] = useState('');
+	const [taskDate, setTaskDate] = useState('');
+	const [taskTime, setTaskTime] = useState('');
+	const [priority, setPriority] = useState('');
+	const date = new Date().toJSON().split('.')[0].split('T').join(' ')
 
+
+	const onMessageChange = (e)=>{
+		setTaskMessage(e.target.value)
+	}
+	const onDateChange = (e)=>{
+		setTaskDate(e.target.value)
+	}
+	const onTimeChange = (e)=>{
+		setTaskTime(e.target.value)
+	}
+	const onPriorityChange = (e)=>{
+		setPriority(e.target.value)
+	}
+	const onAssignNameChange = (e)=>{
+		setAssignName(e.target.value)		
+	}
+	const onAssignChange = (e)=>{
+		setAssignTo(e.target.value)		
+	}
+		
+	// submit handle
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const todo = todoItem;
-	
-		const url = 'https://todotask-management.herokuapp.com/todo';
-		fetch(url, {
-			method: 'POST',
-			headers: {'Content-type': 'application/json; charset=UTF-8'},
-			body: JSON.stringify({todo}),
+		const dataForm = new FormData();
+		dataForm.append( "created_on", date);
+		dataForm.append( "message", taskMessege);
+		dataForm.append( "due_date", taskDate + taskTime);
+		dataForm.append( "priority", priority);
+		dataForm.append( "assigned_name", assignName);
+		dataForm.append( "assigned_to", assignTo);
+		
+		console.log(taskMessege, taskDate, taskTime, priority, assignName, assignTo)
+		const url = 'https://devza.com/tests/tasks/create';
+		axios({
+			method: 'post',
+			headers: token,
+			url: url,
+			data : dataForm
+			
 		})
-		.then((response) => response.json())
-		.then(data => {console.log(data);setIsLoad(true);setTodoItem('')});
+		.then(function (response) {
+			console.log(response);
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		  });
+		
 	};
 	return (
-		<form className="flex" onSubmit={handleSubmit}>
-			<input value={todoItem} onChange={event => setTodoItem(event.target.value)} type="text" placeholder="Type here" className="input input-bordered input-primary rounded-none w-full" required/>
+		<div className="p-2 shadow-lg rounded-md">
+		<form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+			{/* messeges */}
+			<input 
+				defaultValue={taskMessege} 
+				onChange={onMessageChange} type="text" placeholder="Message" className="input input-bordered input-primary rounded-none w-full" required/>
+			
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+				{/* date */}
+				<input 
+				defaultValue={taskDate} 
+				onChange={onDateChange} type="date" placeholder="date" className="input input-bordered input-primary rounded-none w-full" required/>
+				{/* date */}
+				<input 
+				defaultValue={taskTime} 
+				onChange={onTimeChange} type="time" placeholder="time" className="input input-bordered input-primary rounded-none w-full" required/>
+				{/* priority */}
+				<select  
+				defaultValue={priority} 
+				onChange={onPriorityChange} 
+				className="select select-bordered w-full max-w-xs">
+					<option selected>Priority</option>
+					<option value="1">Normal</option>
+					<option value="2">Mid</option>
+					<option value="3">High</option>
+				</select>
+
+				{/* assignt to */}
+
+				<select 
+				defaultValue={assignName}
+				onChange={onAssignNameChange}
+				className="select select-bordered w-full max-w-xs">
+                      <option selected>Assign To</option>
+                      {
+                          users?.users?.map(user => 
+						  <option key={user.id} value={user.name}>
+							{user.name}
+						  </option>)
+                      }
+                </select>
+				
+			</div>
+			
 			<button type='submit' className="btn btn-primary input-bordered input-primary rounded-none">
-				Add
+				Add Task
 			</button>
 		</form>
+	</div>
 	);
 };
 
