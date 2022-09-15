@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const Menu = () => {
 	return (
-	<header className='px-1 lg:px-8 border-b bg-gray-900'>
+	<header className='px-1 lg:px-8 border-b bg-gray-900 fixed w-full z-10'>
 		<div className="navbar justify-between">
 			<div className="flex flex-col"> 
 			<Link to="/" className="uppercase text-gray-50 font-semibold border p-1 lg:border-0 text-xl">

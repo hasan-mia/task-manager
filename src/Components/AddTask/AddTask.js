@@ -45,8 +45,8 @@ const AddTask = () => {
 		e.preventDefault();
 		const dataForm = new FormData();
 		dataForm.append( "created_on", date);
+		dataForm.append( "due_date", taskDate.toString() + taskTime.toString());
 		dataForm.append( "message", taskMessege);
-		dataForm.append( "due_date", taskDate + taskTime);
 		dataForm.append( "priority", priority);
 		dataForm.append( "assigned_name", assignName);
 		dataForm.append( "assigned_to", assignTo);
@@ -96,13 +96,28 @@ const AddTask = () => {
 					<option value="3">High</option>
 				</select>
 
-				{/* assignt to */}
-
-				<select 
-				defaultValue={assignName}
-				onChange={onAssignNameChange}
+				{/* assign to */}
+				<select  
+				defaultValue={assignTo} 
+				onChange={onAssignChange} 
 				className="select select-bordered w-full max-w-xs">
-                      <option selected>Assign To</option>
+					<option selected>Assign to</option>
+					{
+                          users?.users?.map(user => 
+						  <option key={user.id} value={user.id}>
+							{user.name}
+						  </option>)
+                      }
+				</select>
+
+			</div>
+			{/* assignt Name*/}
+			<select 
+				value={assignName}
+				onChange={onAssignNameChange}
+				type="text"
+				className="select select-bordered w-full">
+                      <option selected>Assign Name</option>
                       {
                           users?.users?.map(user => 
 						  <option key={user.id} value={user.name}>
@@ -110,8 +125,6 @@ const AddTask = () => {
 						  </option>)
                       }
                 </select>
-				
-			</div>
 			
 			<button type='submit' className="btn btn-primary input-bordered input-primary rounded-none">
 				Add Task
