@@ -1,11 +1,17 @@
-import React, {useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { taskContext } from '../../App';
 import FormData from 'form-data';
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 
-const AddTask = () => {
+const UpdateTask = () => {
 	// user data from contex api
-	const {users} = useContext(taskContext);
+	const {tasks, users} = useContext(taskContext);
+	// receive id
+	const {id} = useParams();
+	// find the specific task by id
+	const task = tasks.tasks?.find(item => item.id === id);
+	console.log(task.message)
 	// token handler
 	const token = {
 		headers: { "Content-Type": "multipart/form-data" },
@@ -41,18 +47,19 @@ const AddTask = () => {
 	}
 		
 	// submit handle
-	const handleSubmit = (e) => {
+	const handleUpdate = (e) => {
 		e.preventDefault();
 		const dataForm = new FormData();
-		dataForm.append( "created_on", date);
+		dataForm.append( "created_on", task.created_on);
 		dataForm.append( "due_date", taskDate);
-		dataForm.append( "message", taskMessege);
+		dataForm.append( "message", taskMessege ? taskMessege : task.message);
 		dataForm.append( "priority", priority);
 		dataForm.append( "assigned_name", assignName);
 		dataForm.append( "assigned_to", assignTo);
-		
-		console.log(taskMessege, taskDate, taskTime, priority, assignName, assignTo)
-		const url = 'https://devza.com/tests/tasks/create';
+		dataForm.append( "taskid", id);
+		console.log(id)
+		// console.log(taskMessege, taskDate, taskTime, priority, assignName, assignTo)
+		const url = 'https://devza.com/tests/tasks/update';
 		axios({
 			method: 'post',
 			headers: token,
@@ -69,27 +76,23 @@ const AddTask = () => {
 		
 	};
 	return (
-		<div className="p-2 shadow-lg rounded-md">
-		<form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+		<main className='min-h-screen'>
+
+		<div className="p-2 shadow-lg rounded-md pt-16">
+		<form className="flex flex-col gap-2" onSubmit={handleUpdate}>
 			{/* messeges */}
 			<input 
-				defaultValue={taskMessege} 
+				defaultValue={task?.message} 
 				onChange={onMessageChange} type="text" placeholder="Message" className="input input-bordered input-primary rounded-none w-full" required/>
-			
+			{/* date */}
 				<input 
-				defaultValue={`2022-09-13 15:00:19`} 
+				defaultValue={task?.due_date} 
 				onChange={onDateChange} type="text" placeholder="2023-09-13 15:00:19" className="input input-bordered input-primary rounded-none w-full" required/>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-				{/* date */}
 			
-				{/* date */}
-				{/* <input 
-				defaultValue={taskTime} 
-				onChange={onTimeChange} type="time" placeholder="text" className="input input-bordered input-primary rounded-none w-full md:w-1/2" required/>
-				 */}
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
 				{/* priority */}
 				<select  
-				defaultValue={priority} 
+				defaultValue={task?.priority} 
 				onChange={onPriorityChange} 
 				className="select select-bordered w-full">
 					<option selected>Priority</option>
@@ -100,7 +103,7 @@ const AddTask = () => {
 
 				{/* assign to */}
 				<select  
-				defaultValue={assignTo} 
+				defaultValue={task?.assigned_to} 
 				onChange={onAssignChange} 
 				className="select select-bordered w-full">
 					<option selected>Assign to</option>
@@ -115,7 +118,7 @@ const AddTask = () => {
 			</div>
 			{/* assignt Name*/}
 				<select 
-				value={assignName}
+				value={task?.assigned_name}
 				onChange={onAssignNameChange}
 				type="text"
 				className="select select-bordered w-full">
@@ -134,7 +137,8 @@ const AddTask = () => {
 			</button>
 		</form>
 	</div>
+	</main>
 	);
 };
 
-export default AddTask;
+export default UpdateTask;

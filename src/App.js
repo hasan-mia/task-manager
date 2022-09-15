@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Footer from "./Components/Footer/Footer";
 import Menu from "./Components/Header/Menu";
 import Home from "./Components/Home";
-import Updated from "./Components/Updated/Updated";
+import UpdateTask from "./Components/UpdateTask/UpdateTask";
 import useTask from "./Hooks/useTask";
 import useUser from "./Hooks/useUser";
 
@@ -17,7 +17,7 @@ function App() {
      <Menu></Menu>
      <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/update/:id" element={<Updated tasks={tasks}/>}/>
+        <Route path="/update/:id" element={<UpdateTask tasks={tasks}/>}/>
      </Routes>
      <Footer></Footer>
     </taskContext.Provider>

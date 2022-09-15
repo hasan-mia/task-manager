@@ -15,7 +15,6 @@ const Menu = () => {
 			<div className="flex-none">
 				<ul className="menu menu-horizontal p-0 text-gray-50">
 					<li className='text-gray-50'><Link to="/">Home</Link></li>
-					<li className='text-gray-50'><Link to="/task">Task List</Link></li>
 				</ul>
 			</div>
 		</div>
