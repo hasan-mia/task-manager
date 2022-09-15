@@ -14,14 +14,14 @@ const Home = () => {
 				<div className='flex-shrink w-full px-0 my-2 w-12/12 md:w-6/12 lg:w-3/12 xl:px-2 border lg:border-0'>
 					
 					<div className='fixed mt-12'>
-						<h2 className='uppercase pb-2 text-center lg:text-left font-semibold text-xl'>ADD YOUR TASK</h2>
+						<h2 className='uppercase ml-2 pb-2 px-2 text-center lg:text-left font-semibold text-xl text-gray-900 border-b-2 border-gray-400'>ADD TASK</h2>
 						<AddTask></AddTask>
 					</div>
 				</div>
 
 				<div className='flex-shrink w-full px-0 my-2 w-12/12 md:w-6/12 lg:w-9/12 xl:px-2 border lg:border-0'>
 					<div className="mt-12">
-					<h2 className='uppercase mt-6 lg:mt-0 pb-2 text-center lg:text-left font-semibold text-xl'>YOUR TASK LIST</h2>
+					<h2 className='uppercase mb-3 pb-2 px-2 text-center lg:text-left font-semibold text-xl text-gray-900 border-b-2 border-gray-400'>TASK LIST</h2>
 					{
 					searchResult?.length === 0 ? <AllTask></AllTask> : <SearchResult/> 
 					}

@@ -129,7 +129,7 @@ const AddTask = () => {
                 </select>
 			
 			
-			<button type='submit' className="btn btn-primary input-bordered input-primary rounded-none">
+			<button type='submit' className="btn btn-outline input-bordered input-primary rounded-none">
 				Add Task
 			</button>
 		</form>

@@ -58,9 +58,9 @@ const AllTask = () => {
 					tasks.tasks?.map( task => 
 					<div key={task.id} className="card shadow-xl">
 						<div className="card-body">
-							<h2 className="card-title">{task?.assigned_name}</h2>
-							<p>{task?.message}</p>
-							<div className="card-actions justify-end">
+							<h2 className="card-title text-gray-800 text-lg">{task?.assigned_name}</h2>
+							<p className='text-gray-800 text-md'>{task?.message}</p>
+							<div className="card-actions justify-between">
 								<button onClick={()=>deleteTask(task.id)} className="btn btn-error text-gray-50">Delete</button>
 								<button onClick={()=>updateTask(`/update/${task.id}`)} className="btn btn-primary">Update</button>
 							</div>

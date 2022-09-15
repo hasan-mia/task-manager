@@ -78,7 +78,9 @@ const UpdateTask = () => {
 	};
 	return (
 		<main className='min-h-screen'>
-		<div className="p-2 shadow-lg rounded-md pt-24">
+		<div className="p-2 shadow-lg rounded-md pt-24 text-center">
+		<h2 className='uppercase mt-6 lg:mt-0 pb-4 text-center lg:text-left font-semibold text-xl text-gray-900'>UPDATE TASK</h2>
+
 		<form className="flex flex-col gap-2" onSubmit={handleUpdate}>
 			{/* messeges */}
 			<input 
@@ -132,7 +134,7 @@ const UpdateTask = () => {
                 </select>
 			
 			
-			<button type='submit' className="btn btn-primary input-bordered input-primary rounded-none">
+			<button type='submit' className="btn btn-outline input-bordered input-primary rounded-none">
 				Update Task
 			</button>
 		</form>
