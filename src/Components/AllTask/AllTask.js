@@ -9,7 +9,7 @@ const AllTask = () => {
 		<div className='min-h-screen'>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-2">
 			{
-				tasks?.tasks.map( task => 
+				tasks.tasks?.map( task => 
 					<div key={task.id} className="card w-full bg-base-100 shadow-xl">
 						<div className="card-body">
 							<h2 className="card-title">{task?.assigned_name}</h2>
