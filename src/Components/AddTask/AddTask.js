@@ -51,7 +51,7 @@ const AddTask = () => {
 		dataForm.append( "assigned_name", assignName);
 		dataForm.append( "assigned_to", assignTo);
 		
-		console.log(taskMessege, taskDate, taskTime, priority, assignName, assignTo)
+		// console.log(taskMessege, taskDate, taskTime, priority, assignName, assignTo)
 		const url = 'https://devza.com/tests/tasks/create';
 		axios({
 			method: 'post',

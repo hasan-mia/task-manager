@@ -13,7 +13,7 @@ const Home = () => {
 
 				<div className='flex-shrink w-full px-0 my-2 w-12/12 md:w-6/12 lg:w-3/12 xl:px-2 border lg:border-0'>
 					
-					<div className='fixed mt-12'>
+					<div className='static lg:fixed mt-28 lg:mt-12'>
 						<h2 className='uppercase ml-2 pb-2 px-2 text-center lg:text-left font-semibold text-xl text-gray-900 border-b-2 border-gray-400'>ADD TASK</h2>
 						<AddTask></AddTask>
 					</div>
