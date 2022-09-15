@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { taskContext } from '../../App';
 import FormData from 'form-data';
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdateTask = () => {
 	// user data from contex api
@@ -11,7 +11,7 @@ const UpdateTask = () => {
 	const {id} = useParams();
 	// find the specific task by id
 	const task = tasks.tasks?.find(item => item.id === id);
-	console.log(task.message)
+	const homeNavigate = useNavigate()
 	// token handler
 	const token = {
 		headers: { "Content-Type": "multipart/form-data" },
@@ -73,12 +73,12 @@ const UpdateTask = () => {
 		  .catch(function (error) {
 			console.log(error);
 		  });
-		
+	
+		homeNavigate('/')
 	};
 	return (
 		<main className='min-h-screen'>
-
-		<div className="p-2 shadow-lg rounded-md pt-16">
+		<div className="p-2 shadow-lg rounded-md pt-24">
 		<form className="flex flex-col gap-2" onSubmit={handleUpdate}>
 			{/* messeges */}
 			<input 
@@ -133,7 +133,7 @@ const UpdateTask = () => {
 			
 			
 			<button type='submit' className="btn btn-primary input-bordered input-primary rounded-none">
-				Add Task
+				Update Task
 			</button>
 		</form>
 	</div>
